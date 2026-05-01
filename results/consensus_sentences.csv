@@ -1,0 +1,13 @@
+﻿rank,window_index,window_id,nei_warriner,nei_nrc,norm_warriner,norm_nrc,center_sentence
+1,148,149,5.371106275668433,2.833590210770599,0.7624083334809548,0.5557840272497225,"But the others didn’t know what was happening, they were worried, that would excuse their behaviour."
+2,149,150,5.948194554610206,2.731369962039294,0.8443238440737207,0.5357344162331378,"The chief clerk now raised his voice, “Mr. Samsa”, he called to him, “what is wrong?"
+3,166,167,6.727636062234378,5.0983656803466175,0.9549626343664475,0.9999999998038587,"It’s shocking, what can suddenly happen to a person!"
+4,167,168,6.452966040226203,5.081105373032893,0.9159742578591573,0.9966145409347793,"I was quite alright last night, my parents know about it, perhaps better than me, I had a small symptom of it last night already."
+5,170,171,5.601443764984031,4.22738280440554,0.7951038737205561,0.8291642986442221,But you always think you can get over an illness without staying at home.
+6,171,172,5.6527752941165055,3.880702320856723,0.8023901912075525,0.7611659428540095,"Please, don’t make my parents suffer!"
+7,172,173,5.537863586438715,3.723675366573647,0.7860789065202705,0.730366474142381,There’s no basis for any of the accusations you’re making; nobody’s ever said a word to me about any of these things.
+8,236,237,4.698800088407781,4.1931188632120655,0.6669769989455868,0.822443725163423,"Please don’t make things any harder for me than they are already, and don’t take sides against me at the office."
+9,237,238,5.26742157771176,4.509062466939808,0.7476906805954167,0.8844133098253637,I know that nobody likes the travellers.
+10,238,239,5.262558781870917,4.667986299990619,0.7470004250162504,0.9155848347774215,They think we earn an enormous wage as well as having a soft time of it.
+11,239,240,5.334229342006177,4.737659388904881,0.757173791452864,0.9292506040197445,That’s just prejudice
+12,240,241,5.1272209187782165,4.862404661446865,0.7277897243967513,0.9537183021682688,but they have no particular reason to think better of it.
