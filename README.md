@@ -225,9 +225,10 @@ Trương Nguyễn Cát Ly.
 
 ## Acknowledgments
 
-Pipeline implementation assisted by Claude (Anthropic) for code
-refactoring and documentation. Methodology, analysis, and writing
-are the author's own.
+During the preparation of this work, the author used Claude
+(Anthropic) to assist with code refactoring, documentation, and
+manuscript drafting. The author reviewed and edited all content and
+takes full responsibility for it.
 
 ## License
 
