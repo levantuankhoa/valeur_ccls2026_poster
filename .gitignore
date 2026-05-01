@@ -1,0 +1,61 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Virtual envs ---
+.venv/
+venv/
+env/
+.python-version
+
+# --- Lexicons & corpus (license / size — user downloads per data/README.md) ---
+data/*.csv
+data/*.tsv
+data/*.txt
+!data/README.md
+# data/NEI_Pipeline_Reference.md is .md, not blocked above
+
+# --- Models ---
+# Block large joblibs (regeneratable via train_vad.py)
+models/*.joblib
+# KEEP diagnostics JSON — small, lets reviewers see Pearson r without retraining
+!models/*.diagnostics.json
+
+# --- Results ---
+# Block bulky per-window CSVs (regeneratable via encode_vad.py)
+results/*windows*.csv
+# KEEP summary artefacts so poster auditor + reviewers can read without re-running:
+#   <lex>.nei.csv, <lex>.episodes.csv, <lex>.rois.csv, <lex>.plot.png, consensus.heatmap.png
+# (these match smaller, summary-tier outputs only)
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Secrets (defensive — pipeline has none, but never commit these by reflex) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Local sandbox ---
+*.tmp
+*.bak
+scratch/
+
+# --- Claude Code per-developer config (project-wide settings.json may be committed) ---
+.claude/settings.local.json
+
+# --- AI session artifacts (local journal, not part of the published pipeline) ---
+SESSION_HANDOFF_*.md
+LEGACY_CONTEXT.md
