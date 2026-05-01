@@ -206,8 +206,9 @@ the conference):
   title     = {Operationalizing Narrative Entrapment: Predictive
                Affective Trajectories via Contextual Sentence Embeddings
                in Kafka's {\em The Metamorphosis}},
-  booktitle = {Computational Literary Studies Infrastructure Conference
-               (CCLS2026), Potsdam},
+  booktitle = {Computational Literary Studies Conference
+               (CCLS 2026), Potsdam},
+  note      = {Poster session},
   year      = {2026}
 }
 ```
@@ -225,10 +226,10 @@ Trương Nguyễn Cát Ly.
 
 ## Acknowledgments
 
-During the preparation of this work, the author used Claude
+During the preparation of this work, the lead author used Claude
 (Anthropic) to assist with code refactoring, documentation, and
-manuscript drafting. The author reviewed and edited all content and
-takes full responsibility for it.
+manuscript drafting. The lead author reviewed and edited all content
+and takes full responsibility for it.
 
 ## License
 
