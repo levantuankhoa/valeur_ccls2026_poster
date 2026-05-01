@@ -214,10 +214,11 @@ the conference):
 
 ---
 
-## Author
+## Authors
 
-**Lê Văn Tuấn Khoa** — Faculty of Foreign Languages, Dalat University,
-Vietnam. Independent research in computational literary studies.
+**Lê Văn Tuấn Khoa** (lead) — Faculty of Foreign Languages, Dalat
+University, Vietnam. Independent research in computational literary
+studies.
 
 Co-authors: Võ Thị Phương Linh, Nguyễn Thị Ngọc Trinh,
 Trương Nguyễn Cát Ly.
