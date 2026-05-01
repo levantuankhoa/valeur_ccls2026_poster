@@ -222,6 +222,12 @@ Vietnam. Independent research in computational literary studies.
 Co-authors: Võ Thị Phương Linh, Nguyễn Thị Ngọc Trinh,
 Trương Nguyễn Cát Ly.
 
+## Acknowledgments
+
+Pipeline implementation assisted by Claude (Anthropic) for code
+refactoring and documentation. Methodology, analysis, and writing
+are the author's own.
+
 ## License
 
 MIT — see [`LICENSE`](LICENSE).
