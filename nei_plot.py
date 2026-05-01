@@ -305,7 +305,8 @@ def run_consensus(
             print(f"  {lexicon_names[i]} vs {lexicon_names[j]}:  rho={rho:.3f}  p={p:.3e}")
 
     # Row-wise min-max normalize for visualization
-    norm = (mat - mat.min(axis=1, keepdims=True)) / (mat.ptp(axis=1, keepdims=True) + 1e-9)
+    # (np.ptp(...) instead of mat.ptp(...) — the method form was removed in NumPy 2.0)
+    norm = (mat - mat.min(axis=1, keepdims=True)) / (np.ptp(mat, axis=1, keepdims=True) + 1e-9)
 
     # Consensus: windows flagged in all lexicons at top-percentile
     thresholds = np.quantile(norm, percentile, axis=1, keepdims=True)
