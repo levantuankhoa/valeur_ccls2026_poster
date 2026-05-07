@@ -16,6 +16,7 @@ Example:
 from __future__ import annotations
 
 import argparse
+import sys
 import time
 from pathlib import Path
 
@@ -25,6 +26,12 @@ import pandas as pd
 from scipy.signal import savgol_filter
 
 import config
+
+# Force UTF-8 stdout/stderr — keeps non-ASCII glyphs (×, —, →) from
+# crashing on cp1252 Windows consoles.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 from utils import (
     choose_odd_window,
     encode_texts,

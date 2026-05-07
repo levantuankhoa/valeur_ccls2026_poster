@@ -21,6 +21,7 @@ Example:
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -28,6 +29,12 @@ import pandas as pd
 
 import config
 from nei_plot import compute_nei
+
+# Force UTF-8 stdout/stderr — keeps non-ASCII glyphs (—, →) from
+# crashing on cp1252 Windows consoles.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 
 def extract_consensus(
@@ -78,18 +85,21 @@ def extract_consensus(
     print(f"  Consensus: {len(consensus_idx)} windows")
     print(f"{'=' * 64}")
 
+    has_full = "Full_Window_Text" in df_a.columns
     rows = []
     for rank, i in enumerate(consensus_idx, start=1):
         sent = str(df_a.loc[i, "Center_Sentence"])
+        full = str(df_a.loc[i, "Full_Window_Text"]) if has_full else ""
         rows.append({
-            "rank":             rank,
-            "window_index":     int(i),
-            "window_id":        int(df_a.loc[i, "Window_ID"]),
-            f"nei_{label_a}":   float(nei_a[i]),
-            f"nei_{label_b}":   float(nei_b[i]),
-            f"norm_{label_a}":  float(norm_a[i]),
-            f"norm_{label_b}":  float(norm_b[i]),
-            "center_sentence":  sent,
+            "rank":              rank,
+            "window_index":      int(i),
+            "window_id":         int(df_a.loc[i, "Window_ID"]),
+            f"nei_{label_a}":    float(nei_a[i]),
+            f"nei_{label_b}":    float(nei_b[i]),
+            f"norm_{label_a}":   float(norm_a[i]),
+            f"norm_{label_b}":   float(norm_b[i]),
+            "center_sentence":   sent,
+            "full_window_text":  full,
         })
         # Truncate sentence for stdout legibility
         preview = sent if len(sent) <= 100 else sent[:97] + "..."

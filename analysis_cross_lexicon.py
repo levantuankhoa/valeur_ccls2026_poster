@@ -19,11 +19,18 @@ Example:
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from scipy.stats import pearsonr, spearmanr
+
+# Force UTF-8 stdout/stderr — keeps non-ASCII glyphs from crashing on
+# cp1252 Windows consoles.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 DIMENSIONS = ("Valence", "Arousal", "Dominance")
 

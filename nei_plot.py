@@ -24,6 +24,7 @@ Example (dual-lexicon consensus heatmap):
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 from typing import List, Tuple
 
@@ -33,6 +34,12 @@ import numpy as np
 import pandas as pd
 
 import config
+
+# Force UTF-8 stdout/stderr — keeps non-ASCII glyphs (▶, →, —) from
+# crashing on cp1252 Windows consoles.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 
 # =============================================================================
@@ -106,6 +113,29 @@ def diagnose_components(zV: np.ndarray, zA: np.ndarray, zD: np.ndarray, min_comp
 # =============================================================================
 # Episode & ROI extraction
 # =============================================================================
+def _merge_overlap(a: str, b: str) -> str:
+    """Append `b` to `a`, removing the longest suffix of `a` that prefixes `b`.
+
+    For sliding windows with stride < window_size, consecutive Full_Window_Text
+    strings share a suffix/prefix overlap (e.g. "A B C" + "B C D" → "A B C D").
+    """
+    max_k = min(len(a), len(b))
+    for k in range(max_k, 0, -1):
+        if a.endswith(b[:k]):
+            return a + b[k:]
+    return a + " " + b
+
+
+def concat_window_texts(texts: List[str]) -> str:
+    """Concatenate sliding-window texts, dedup'ing overlap by longest suffix-prefix match."""
+    if not texts:
+        return ""
+    result = texts[0]
+    for t in texts[1:]:
+        result = _merge_overlap(result, t)
+    return result
+
+
 def extract_contiguous_regions(mask: np.ndarray, min_duration: int = 1) -> List[Tuple[int, int]]:
     """Return list of (start, end) inclusive indices where mask is True."""
     regions = []
@@ -226,17 +256,25 @@ def run_single(
     out_prefix.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(out_prefix.with_suffix(".nei.csv"), index=False, encoding="utf-8-sig")
 
+    has_center = "Center_Sentence" in df.columns
+    has_full   = "Full_Window_Text" in df.columns
     ep_rows = []
     for eid, (s, e) in enumerate(episodes, start=1):
         center = (s + e) // 2
+        if has_full:
+            window_texts = [str(df.loc[k, "Full_Window_Text"]) for k in range(s, e + 1)]
+            episode_full_text = concat_window_texts(window_texts)
+        else:
+            episode_full_text = ""
         ep_rows.append({
-            "episode_id":     eid,
-            "start_window":   int(df.loc[s, "Window_ID"]),
-            "end_window":     int(df.loc[e, "Window_ID"]),
-            "duration":       int(e - s + 1),
-            "max_nei":        float(nei[s:e + 1].max()),
-            "mean_nei":       float(nei[s:e + 1].mean()),
-            "sample_sentence": str(df.loc[center, "Center_Sentence"]) if "Center_Sentence" in df.columns else "",
+            "episode_id":        eid,
+            "start_window":      int(df.loc[s, "Window_ID"]),
+            "end_window":        int(df.loc[e, "Window_ID"]),
+            "duration":          int(e - s + 1),
+            "max_nei":           float(nei[s:e + 1].max()),
+            "mean_nei":          float(nei[s:e + 1].mean()),
+            "center_sentence":   str(df.loc[center, "Center_Sentence"]) if has_center else "",
+            "episode_full_text": episode_full_text,
         })
     if ep_rows:
         pd.DataFrame(ep_rows).to_csv(out_prefix.with_suffix(".episodes.csv"), index=False, encoding="utf-8-sig")
