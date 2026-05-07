@@ -185,10 +185,7 @@ NEI (printed in the consensus run) is a direct construct-validity check.
 - **GPU is optional, not required.** `utils.detect_device()` auto-selects
   CUDA via PyTorch when a compatible GPU is visible, otherwise falls back
   to CPU. Force CPU explicitly with `FORCE_CPU=1 bash run_all.sh` if you
-  need deterministic behavior on a mixed machine. The hot path is the two
-  SBERT encode calls (lexicon items + Kafka windows); a modern desktop
-  CUDA GPU shaves these to under a minute, but the X3D cache makes CPU
-  runtimes very competitive for a single-corpus pipeline.
+  need deterministic behavior on a mixed machine.
 - **No mixed-precision or batch-size tuning is required** for the default
   corpus size; `config.BATCH_SIZE = 256` works on CPU and on 8 GB+ GPUs.
 
