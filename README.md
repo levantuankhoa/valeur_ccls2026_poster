@@ -63,7 +63,7 @@ The three scripts are independent and composable:
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/levantuankhoa/valeur_ccls2026.git
+git clone https://github.com/levantuankhoa/valeur_ccls2026_poster.git
 cd valeur_ccls2026
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
