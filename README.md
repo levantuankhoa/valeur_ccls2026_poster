@@ -162,11 +162,7 @@ NEI (printed in the consensus run) is a direct construct-validity check.
 ## Method notes
 
 - **Sentence transformer:** `all-mpnet-base-v2` (768-d) is the default in
-  `config.SBERT_MODEL` — it matches the original Feb 2025 reference run
-  and the held-out probe correlations reported in the paper. A faster
-  `all-MiniLM-L6-v2` (384-d) variant is supported by swapping the
-  constant in `config.py`; expect a small drop in Pearson r on the
-  Arousal and Dominance probes.
+  `config.SBERT_MODEL`.
 - **Window size:** 3 sentences, stride 1. Adjust in `config.py`.
 - **Smoothing:** Savitzky–Golay, auto-sized odd window ≤ 21, polyorder 2.
 - **Ridge > RF:** Ridge consistently outperforms Random Forest on the
